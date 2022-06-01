@@ -14,7 +14,9 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
+import com.springdata.jpa.model.Car;
 import com.springdata.jpa.model.Client;
+import com.springdata.jpa.model.Color;
 import com.springdata.jpa.model.Data;
 import com.springdata.jpa.model.Info;
 import com.springdata.jpa.model.Person;
@@ -28,19 +30,13 @@ public class Main {
 		// TODO Auto-generated method stub
 		SessionFactory sessionFactory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Student.class)
-				.addAnnotatedClass(Info.class)
+				.addAnnotatedClass(Car.class)
+				.addAnnotatedClass(Color.class)
 				.buildSessionFactory();
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			int id=4;
-			
-			Student student = new Student();
-			student = session.get(Student.class, id);
-			session.close();
-			System.out.println(student.getName());
-			System.out.println(student.getInfos().get(0).getPhone());
+
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
@@ -248,7 +244,13 @@ public class Main {
 //student = session.get(Student.class, id);
 //session.remove(student);
 
-
+//int id=4;
+//
+//Student student = new Student();
+//student = session.get(Student.class, id);
+//session.close();
+//System.out.println(student.getName());
+//System.out.println(student.getInfos().get(0).getPhone());
 
 
 
