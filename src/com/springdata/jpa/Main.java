@@ -38,18 +38,15 @@ public class Main {
 			session.beginTransaction();
 			int id=2;
 			Car c = session.get(Car.class, id);
-			session.close();
-			System.out.println(c.getName());
-			for(Color color: c.getColors()) {
-				System.out.println(color.getName());
-			}
+			c.setName("Updated Car");
+			c.getColors().get(0).setName("Updated Black");
 			
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		} finally {
-//			session.close();
+			session.close();
 		}
 		
 	}
