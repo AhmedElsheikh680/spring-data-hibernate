@@ -34,16 +34,19 @@ public class Main {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			int id=3;
+			int id=4;
+			
 			Student student = new Student();
 			student = session.get(Student.class, id);
-			session.remove(student);
+			session.close();
+			System.out.println(student.getName());
+			System.out.println(student.getInfos().get(0).getPhone());
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		} finally {
-			session.close();
+//			session.close();
 		}
 		
 	}
@@ -240,7 +243,10 @@ public class Main {
 //session.update(student);
 
 
-
+//int id=3;
+//Student student = new Student();
+//student = session.get(Student.class, id);
+//session.remove(student);
 
 
 

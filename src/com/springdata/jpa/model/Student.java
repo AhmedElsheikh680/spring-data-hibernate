@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Student {
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="student")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="student", fetch = FetchType.LAZY)
 	private List<Info>infos=new ArrayList<Info>();
 
 	public Student() {
