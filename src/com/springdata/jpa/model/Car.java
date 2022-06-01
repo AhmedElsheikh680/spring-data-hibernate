@@ -38,6 +38,11 @@ public class Car {
 		super();
 	}
 
+	public Car(String name) {
+		super();
+		this.name = name;
+	}
+
 	public int getId() {
 		return id;
 	}

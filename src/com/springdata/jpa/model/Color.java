@@ -40,6 +40,12 @@ public class Color {
 	}
 
 
+	public Color(String name) {
+		super();
+		this.name = name;
+	}
+
+
 	public int getId() {
 		return id;
 	}
