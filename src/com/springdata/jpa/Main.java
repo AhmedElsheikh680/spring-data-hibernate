@@ -34,23 +34,13 @@ public class Main {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
+			int id=3;
 			Student student = new Student();
-			student.setName("Ahmed");
-			
-			Info info = new Info();
-			info.setPhone("01271265897");
-			
-			Info info2 = new Info();
-			info2.setPhone("01004254283");
-			
-			student.getInfos().add(info);
-			student.getInfos().add(info2);
-			
-			info.setStudent(student);
-			info2.setStudent(student);
-			
-			session.save(student);
-			
+			student = session.get(Student.class, id);
+			System.out.println(student.getName());
+			for(Info i: student.getInfos()) {
+				System.out.println(i.getPhone());
+			}
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
@@ -217,6 +207,22 @@ public class Main {
 //session.save(data);
 
 
+//Student student = new Student();
+//student.setName("Ahmed");
+//
+//Info info = new Info();
+//info.setPhone("01271265897");
+//
+//Info info2 = new Info();
+//info2.setPhone("01004254283");
+//
+//student.getInfos().add(info);
+//student.getInfos().add(info2);
+//
+//info.setStudent(student);
+//info2.setStudent(student);
+//
+//session.save(student);
 
 
 
