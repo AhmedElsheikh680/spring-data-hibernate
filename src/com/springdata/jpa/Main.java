@@ -15,6 +15,8 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.springdata.jpa.model.Client;
+import com.springdata.jpa.model.Data;
+import com.springdata.jpa.model.Person;
 
 
 
@@ -24,28 +26,20 @@ public class Main {
 		// TODO Auto-generated method stub
 		SessionFactory sessionFactory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Client.class)
+				.addAnnotatedClass(Person.class)
+				.addAnnotatedClass(Data.class)
 				.buildSessionFactory();
 		Session session = sessionFactory.getCurrentSession();
-		int id=1;
 		try {
 			session.beginTransaction();
-			Criteria criteria = session.createCriteria(Client.class);
-//			criteria.setProjection(Projections.min("id"));
-//			criteria.setProjection(Projections.max("id"));
-//			criteria.setProjection(Projections.sum("id"));
-//			criteria.setProjection(Projections.avg("id"));
-//			criteria.setProjection(Projections.count("country"));
-			criteria.setProjection(Projections.countDistinct("country"));
-			List<Client> clients = criteria.list();
-			System.out.println(clients.get(0));
+			
 			session.getTransaction().commit();
+			
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		} finally {
 			session.close();
 		}
-		
 		
 	}
 
@@ -171,6 +165,29 @@ public class Main {
 //	System.out.println(clients.get(i).getFullName());
 //}
 
+//SessionFactory sessionFactory = new Configuration()
+//.configure("hibernate.cfg.xml")
+//.addAnnotatedClass(Client.class)
+//.buildSessionFactory();
+//Session session = sessionFactory.getCurrentSession();
+//int id=1;
+//try {
+//session.beginTransaction();
+//Criteria criteria = session.createCriteria(Client.class);
+////criteria.setProjection(Projections.min("id"));
+////criteria.setProjection(Projections.max("id"));
+////criteria.setProjection(Projections.sum("id"));
+////criteria.setProjection(Projections.avg("id"));
+////criteria.setProjection(Projections.count("country"));
+//criteria.setProjection(Projections.countDistinct("country"));
+//List<Client> clients = criteria.list();
+//System.out.println(clients.get(0));
+//session.getTransaction().commit();
+//} catch(Exception e) {
+//System.out.println(e.toString());
+//} finally {
+//session.close();
+//}
 
 
 
