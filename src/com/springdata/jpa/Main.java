@@ -33,9 +33,11 @@ public class Main {
 		try {
 			session.beginTransaction();
 			Data data = new Data();
-			data.setId(1);
+			data.setId(3);
 			Data d = session.get(Data.class, data.getId());
-			session.delete(d);
+			d.setAge("50Updated");
+			d.getPerson().setName("Ahmed Updated");
+//			session.delete(d);
 			System.out.println(d.getAge()+ " "+ d.getPerson().getName());
 			session.getTransaction().commit();
 			
