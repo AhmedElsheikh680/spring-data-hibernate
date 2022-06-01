@@ -34,6 +34,22 @@ public class Main {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
+			Student student = new Student();
+			student.setName("Ahmed");
+			
+			Info info = new Info();
+			info.setPhone("01271265897");
+			
+			Info info2 = new Info();
+			info2.setPhone("01004254283");
+			
+			student.getInfos().add(info);
+			student.getInfos().add(info2);
+			
+			info.setStudent(student);
+			info2.setStudent(student);
+			
+			session.save(student);
 			
 			session.getTransaction().commit();
 			
