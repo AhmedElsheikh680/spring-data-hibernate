@@ -1,8 +1,11 @@
 package com.springdata.jpa;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.springdata.jpa.model.Client;
 
@@ -17,12 +20,16 @@ public class Main {
 				.addAnnotatedClass(Client.class)
 				.buildSessionFactory();
 		Session session = sessionFactory.getCurrentSession();
-		
+		int id=1;
 		try {
 			session.beginTransaction();
-			session.createQuery("delete from Client where fullName='Samy Ali' ")
-			.executeUpdate();
-			
+			Query query = session.createQuery("from Client where id=:v1 and fullName=:v2");
+			query.setInteger("v1", id);
+			query.setString("v2", "AhmedAA");
+			List<Client> clients = query.list();
+			for(int i=0; i<clients.size(); i++) {
+				System.out.println(clients.get(i).getAge());
+			}
 			session.getTransaction().commit();
 		} catch(Exception e) {
 			System.out.println(e.toString());
@@ -84,10 +91,30 @@ public class Main {
 //session.createQuery("update Client set fullName='AhmedAA' where id=1 ")
 //.executeUpdate();
 
+//session.createQuery("delete from Client where fullName='Samy Ali' ")
+//.executeUpdate();
+
+//List<Client> clients = session.createQuery("from Client").list();
+//for(int i=0; i<clients.size(); i++) {
+//	System.out.println("FullName: "+ clients.get(i).getFullName());
+//}
+
+//Query query = session.createQuery("from Client");
+//query.setFirstResult(0);
+//query.setMaxResults(3);
+//List<Client> clients = query.list();
+//for(int i=0; i<clients.size(); i++) {
+//	System.out.println(clients.get(i).getFullName());
+//}
 
 
-
-
+//Query query = session.createQuery("from Client where id=?1 and fullName=?2");
+//query.setInteger(1, id);
+//query.setString(2, "AhmedAA");
+//List<Client> clients = query.list();
+//for(int i=0; i<clients.size(); i++) {
+//	System.out.println(clients.get(i).getAge());
+//}
 
 
 
