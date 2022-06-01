@@ -1,31 +1,31 @@
 package com.springdata.jpa.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="data")
-public class Data {
-	
+@Table(name="student")
+public class Student {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="age")
-	private String age;
+	@Column(name="name")
+	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="person_id")
-	private Person person;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="student")
+	private Set<Info>infos;
 
-	public Data() {
+	public Student() {
 		super();
 	}
 
@@ -37,21 +37,21 @@ public class Data {
 		this.id = id;
 	}
 
-	public String getAge() {
-		return age;
+	public String getName() {
+		return name;
 	}
 
-	public void setAge(String age) {
-		this.age = age;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Person getPerson() {
-		return person;
+	public Set<Info> getInfos() {
+		return infos;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setInfos(Set<Info> infos) {
+		this.infos = infos;
 	}
-
+	
+	
 }
-

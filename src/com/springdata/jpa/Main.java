@@ -16,7 +16,9 @@ import org.hibernate.query.Query;
 
 import com.springdata.jpa.model.Client;
 import com.springdata.jpa.model.Data;
+import com.springdata.jpa.model.Info;
 import com.springdata.jpa.model.Person;
+import com.springdata.jpa.model.Student;
 
 
 
@@ -26,19 +28,13 @@ public class Main {
 		// TODO Auto-generated method stub
 		SessionFactory sessionFactory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Person.class)
-				.addAnnotatedClass(Data.class)
+				.addAnnotatedClass(Student.class)
+				.addAnnotatedClass(Info.class)
 				.buildSessionFactory();
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			Data data = new Data();
-			data.setId(3);
-			Data d = session.get(Data.class, data.getId());
-			d.setAge("50Updated");
-			d.getPerson().setName("Ahmed Updated");
-//			session.delete(d);
-			System.out.println(d.getAge()+ " "+ d.getPerson().getName());
+			
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
