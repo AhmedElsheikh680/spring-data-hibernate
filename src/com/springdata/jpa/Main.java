@@ -2,9 +2,14 @@ package com.springdata.jpa;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.springdata.jpa.model.Client;
@@ -23,25 +28,34 @@ public class Main {
 		int id=1;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("select Max(id) from Client");
-			Query query2 = session.createQuery("select Min(id) from Client");
-			Query query3 = session.createQuery("select sum(age) from Client");
-			Query query4= session.createQuery("select avg(age) from Client");
-			Query query5 = session.createQuery("select count(country) from Client");
-			Query query6 = session.createQuery("select count(distinct country) from Client");
-			
-			System.out.println("Max: "+ query.list().get(0));
-			System.out.println("Min: "+ query2.list().get(0));
-			System.out.println("Sum: "+ query3.list().get(0));
-			System.out.println("Average: "+ query4.list().get(0));
-			System.out.println("Count: "+ query5.list().get(0));
-			System.out.println("Count Distinct: "+ query6.list().get(0));
+			Long[] ids = {(long)1,(long)2,(long)3};
+			Criteria criteria = session.createCriteria(Client.class);
+//			criteria.setFirstResult(0);
+//			criteria.setMaxResults(3);
+//			criteria.add(Restrictions.gt("id", (long)3));
+//			criteria.add(Restrictions.le("id", (long)2));
+//			criteria.add(Restrictions.between("id", (long)1, (long)3));
+//			criteria.add(Restrictions.in("id", ids));
+//			criteria.add(Restrictions.isNotNull("country"));
+//			criteria.add(Restrictions.isEmpty("country"));
+//			criteria.add(Restrictions.eq("fullName", "AhmedAA"));
+//			criteria.add(Restrictions.like("fullName", "A", MatchMode.START));
+//			criteria.add(Restrictions.like("fullName", "i", MatchMode.END));
+			Criterion criterion = Restrictions.eq("fullName", "AhmedAA");
+			Criterion criterion2 = Restrictions.eq("country", "Cairo");
+			LogicalExpression logicalExpression = Restrictions.or(criterion, criterion2);
+			criteria.add(logicalExpression);
+			List<Client> clients = criteria.list();
+			for(int i=0; i<clients.size(); i++) {
+				System.out.println(clients.get(i).getFullName());
+			}
 			session.getTransaction().commit();
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		} finally {
 			session.close();
 		}
+		
 		
 	}
 
@@ -130,6 +144,59 @@ public class Main {
 //for(int i=0; i<clients.size(); i++) {
 //	System.out.println(clients.get(i).getAge());
 //}
+
+//Query query = session.createQuery("select Max(id) from Client");
+//Query query2 = session.createQuery("select Min(id) from Client");
+//Query query3 = session.createQuery("select sum(age) from Client");
+//Query query4= session.createQuery("select avg(age) from Client");
+//Query query5 = session.createQuery("select count(country) from Client");
+//Query query6 = session.createQuery("select count(distinct country) from Client");
+//
+//System.out.println("Max: "+ query.list().get(0));
+//System.out.println("Min: "+ query2.list().get(0));
+//System.out.println("Sum: "+ query3.list().get(0));
+//System.out.println("Average: "+ query4.list().get(0));
+//System.out.println("Count: "+ query5.list().get(0));
+//System.out.println("Count Distinct: "+ query6.list().get(0));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
