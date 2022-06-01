@@ -20,7 +20,7 @@ public class Main {
 		
 		try {
 			session.beginTransaction();
-			session.createQuery("update Client set age=1001 where id=1 ")
+			session.createQuery("delete from Client where fullName='Samy Ali' ")
 			.executeUpdate();
 			
 			session.getTransaction().commit();
@@ -80,4 +80,40 @@ public class Main {
 //Client client = new Client();
 //client.setId((long)2);
 //session.delete(client);
+
+//session.createQuery("update Client set fullName='AhmedAA' where id=1 ")
+//.executeUpdate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
