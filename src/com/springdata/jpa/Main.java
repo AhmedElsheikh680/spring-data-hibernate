@@ -32,7 +32,13 @@ public class Main {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			
+			Person person = new Person();
+			person.setName("Mohamed");
+			session.save(person);
+			Data data = new Data();
+			data.setAge("28");
+			data.setPerson(person);
+			session.save(data);
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
