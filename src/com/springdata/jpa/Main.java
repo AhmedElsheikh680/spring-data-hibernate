@@ -9,6 +9,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
@@ -28,27 +30,15 @@ public class Main {
 		int id=1;
 		try {
 			session.beginTransaction();
-			Long[] ids = {(long)1,(long)2,(long)3};
 			Criteria criteria = session.createCriteria(Client.class);
-//			criteria.setFirstResult(0);
-//			criteria.setMaxResults(3);
-//			criteria.add(Restrictions.gt("id", (long)3));
-//			criteria.add(Restrictions.le("id", (long)2));
-//			criteria.add(Restrictions.between("id", (long)1, (long)3));
-//			criteria.add(Restrictions.in("id", ids));
-//			criteria.add(Restrictions.isNotNull("country"));
-//			criteria.add(Restrictions.isEmpty("country"));
-//			criteria.add(Restrictions.eq("fullName", "AhmedAA"));
-//			criteria.add(Restrictions.like("fullName", "A", MatchMode.START));
-//			criteria.add(Restrictions.like("fullName", "i", MatchMode.END));
-			Criterion criterion = Restrictions.eq("fullName", "AhmedAA");
-			Criterion criterion2 = Restrictions.eq("country", "Cairo");
-			LogicalExpression logicalExpression = Restrictions.or(criterion, criterion2);
-			criteria.add(logicalExpression);
+//			criteria.setProjection(Projections.min("id"));
+//			criteria.setProjection(Projections.max("id"));
+//			criteria.setProjection(Projections.sum("id"));
+//			criteria.setProjection(Projections.avg("id"));
+//			criteria.setProjection(Projections.count("country"));
+			criteria.setProjection(Projections.countDistinct("country"));
 			List<Client> clients = criteria.list();
-			for(int i=0; i<clients.size(); i++) {
-				System.out.println(clients.get(i).getFullName());
-			}
+			System.out.println(clients.get(0));
 			session.getTransaction().commit();
 		} catch(Exception e) {
 			System.out.println(e.toString());
@@ -159,7 +149,27 @@ public class Main {
 //System.out.println("Count: "+ query5.list().get(0));
 //System.out.println("Count Distinct: "+ query6.list().get(0));
 
-
+//Long[] ids = {(long)1,(long)2,(long)3};
+//Criteria criteria = session.createCriteria(Client.class);
+//criteria.setFirstResult(0);
+//criteria.setMaxResults(3);
+//criteria.add(Restrictions.gt("id", (long)3));
+//criteria.add(Restrictions.le("id", (long)2));
+//criteria.add(Restrictions.between("id", (long)1, (long)3));
+//criteria.add(Restrictions.in("id", ids));
+//criteria.add(Restrictions.isNotNull("country"));
+//criteria.add(Restrictions.isEmpty("country"));
+//criteria.add(Restrictions.eq("fullName", "AhmedAA"));
+//criteria.add(Restrictions.like("fullName", "A", MatchMode.START));
+//criteria.add(Restrictions.like("fullName", "i", MatchMode.END));
+//Criterion criterion = Restrictions.eq("fullName", "AhmedAA");
+//Criterion criterion2 = Restrictions.eq("country", "Cairo");
+//LogicalExpression logicalExpression = Restrictions.or(criterion, criterion2);
+//criteria.add(logicalExpression);
+//List<Client> clients = criteria.list();
+//for(int i=0; i<clients.size(); i++) {
+//	System.out.println(clients.get(i).getFullName());
+//}
 
 
 
