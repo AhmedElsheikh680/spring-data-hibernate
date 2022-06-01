@@ -21,7 +21,7 @@ public class Data {
 	@Column(name="age")
 	private String age;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="person_id")
 	private Person person;
 

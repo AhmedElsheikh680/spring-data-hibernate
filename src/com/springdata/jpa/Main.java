@@ -32,13 +32,11 @@ public class Main {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			Person person = new Person();
-			person.setName("Mohamed");
-			session.save(person);
 			Data data = new Data();
-			data.setAge("28");
-			data.setPerson(person);
-			session.save(data);
+			data.setId(1);
+			Data d = session.get(Data.class, data.getId());
+			session.delete(d);
+			System.out.println(d.getAge()+ " "+ d.getPerson().getName());
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
@@ -195,7 +193,14 @@ public class Main {
 //session.close();
 //}
 
-
+//OneTOone
+//Person person = new Person();
+//person.setName("Mohamed");
+//session.save(person);
+//Data data = new Data();
+//data.setAge("28");
+//data.setPerson(person);
+//session.save(data);
 
 
 
