@@ -1,5 +1,6 @@
 package com.springdata.jpa.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.List;
 
 @Entity
 @Table(name="student")
@@ -24,7 +27,7 @@ public class Student {
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="student")
-	private Set<Info>infos=new HashSet<Info>();
+	private List<Info>infos=new ArrayList<Info>();
 
 	public Student() {
 		super();
@@ -46,11 +49,11 @@ public class Student {
 		this.name = name;
 	}
 
-	public Set<Info> getInfos() {
+	public List<Info> getInfos() {
 		return infos;
 	}
 
-	public void setInfos(Set<Info> infos) {
+	public void setInfos(List<Info> infos) {
 		this.infos = infos;
 	}
 	
