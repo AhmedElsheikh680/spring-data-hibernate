@@ -37,11 +37,7 @@ public class Main {
 			int id=3;
 			Student student = new Student();
 			student = session.get(Student.class, id);
-			student.setName("Samy");
-			student.getInfos().get(0).setPhone("01000");
-			student.getInfos().get(1).setPhone("012000");
-			
-			session.update(student);
+			session.remove(student);
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
@@ -234,7 +230,14 @@ public class Main {
 //	System.out.println(i.getPhone());
 //}
 
-
+//int id=3;
+//Student student = new Student();
+//student = session.get(Student.class, id);
+//student.setName("Samy");
+//student.getInfos().get(0).setPhone("01000");
+//student.getInfos().get(1).setPhone("012000");
+//
+//session.update(student);
 
 
 
