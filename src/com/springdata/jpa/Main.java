@@ -36,30 +36,14 @@ public class Main {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			Car car = new Car("Car1");
-			Car car2 = new Car("Car2");
-			Car car3 = new Car("car3");
-			//////////////////////
-			Color color = new Color("Red");
-			Color color2 = new Color("Green");
-			Color color3 = new Color("Blue");
-			//////////////////////
-			car.getColors().add(color);
-			car.getColors().add(color2);
-			car.getColors().add(color3);
-			//////////////////////////
-			car2.getColors().add(color);
-			car2.getColors().add(color2);
-			car2.getColors().add(color3);
-			////////////////////
-			car3.getColors().add(color);
-			car3.getColors().add(color2);
-			car3.getColors().add(color3);
-			////////////////////
-			session.save(car);
-			session.save(car2);
-			session.save(car3);
-
+			int id=2;
+			Car c = session.get(Car.class, id);
+			session.close();
+			System.out.println(c.getName());
+			for(Color color: c.getColors()) {
+				System.out.println(color.getName());
+			}
+			
 			session.getTransaction().commit();
 			
 		} catch(Exception e) {
@@ -275,7 +259,29 @@ public class Main {
 //System.out.println(student.getName());
 //System.out.println(student.getInfos().get(0).getPhone());
 
-
+//Car car = new Car("Car1");
+//Car car2 = new Car("Car2");
+//Car car3 = new Car("car3");
+////////////////////////
+//Color color = new Color("Red");
+//Color color2 = new Color("Green");
+//Color color3 = new Color("Blue");
+////////////////////////
+//car.getColors().add(color);
+//car.getColors().add(color2);
+//car.getColors().add(color3);
+////////////////////////////
+//car2.getColors().add(color);
+//car2.getColors().add(color2);
+//car2.getColors().add(color3);
+//////////////////////
+//car3.getColors().add(color);
+//car3.getColors().add(color2);
+//car3.getColors().add(color3);
+//////////////////////
+//session.save(car);
+//session.save(car2);
+//session.save(car3);
 
 
 
