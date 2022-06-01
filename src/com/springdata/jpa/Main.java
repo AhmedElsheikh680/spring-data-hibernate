@@ -23,13 +23,19 @@ public class Main {
 		int id=1;
 		try {
 			session.beginTransaction();
-			Query query = session.createQuery("from Client where id=:v1 and fullName=:v2");
-			query.setInteger("v1", id);
-			query.setString("v2", "AhmedAA");
-			List<Client> clients = query.list();
-			for(int i=0; i<clients.size(); i++) {
-				System.out.println(clients.get(i).getAge());
-			}
+			Query query = session.createQuery("select Max(id) from Client");
+			Query query2 = session.createQuery("select Min(id) from Client");
+			Query query3 = session.createQuery("select sum(age) from Client");
+			Query query4= session.createQuery("select avg(age) from Client");
+			Query query5 = session.createQuery("select count(country) from Client");
+			Query query6 = session.createQuery("select count(distinct country) from Client");
+			
+			System.out.println("Max: "+ query.list().get(0));
+			System.out.println("Min: "+ query2.list().get(0));
+			System.out.println("Sum: "+ query3.list().get(0));
+			System.out.println("Average: "+ query4.list().get(0));
+			System.out.println("Count: "+ query5.list().get(0));
+			System.out.println("Count Distinct: "+ query6.list().get(0));
 			session.getTransaction().commit();
 		} catch(Exception e) {
 			System.out.println(e.toString());
@@ -39,6 +45,7 @@ public class Main {
 		
 	}
 
+	
 }
 
 
@@ -116,7 +123,13 @@ public class Main {
 //	System.out.println(clients.get(i).getAge());
 //}
 
-
+//Query query = session.createQuery("from Client where id=:v1 and fullName=:v2");
+//query.setInteger("v1", id);
+//query.setString("v2", "AhmedAA");
+//List<Client> clients = query.list();
+//for(int i=0; i<clients.size(); i++) {
+//	System.out.println(clients.get(i).getAge());
+//}
 
 
 
