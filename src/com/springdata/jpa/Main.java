@@ -38,8 +38,7 @@ public class Main {
 			session.beginTransaction();
 			int id=2;
 			Car c = session.get(Car.class, id);
-			c.setName("Updated Car");
-			c.getColors().get(0).setName("Updated Black");
+			session.delete(c);
 			
 			session.getTransaction().commit();
 			
